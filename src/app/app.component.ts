@@ -53,6 +53,7 @@ export class AppComponent {
           templateOptions: {
             label: 'Address',
             addText: 'Add Address',
+            removeText: 'Remove Address'
           },
           fieldArray: {
             fieldGroup: [
