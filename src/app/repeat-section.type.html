@@ -1,0 +1,15 @@
+<div *ngFor="let field of field.fieldGroup; let i = index;" class="row">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>{{ to.label }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <formly-field class="col" [field]="field"></formly-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" type="button" (click)="remove(i)">Remove</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<button class="add-button" mat-raised-button color="secondary" type="button" (click)="add()">{{ to.addText }}</button>
