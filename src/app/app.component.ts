@@ -88,6 +88,20 @@ export class AppComponent {
             required: true,
           },
         },
+        {
+          key: 'hobby',
+          wrappers: ['panel'],
+          templateOptions: { label: 'Hobby' },
+          fieldGroup: [{
+            key: 'name',
+            type: 'input',
+            templateOptions: {
+              required: true,
+              type: 'text',
+              label: 'Name',
+            },
+          }],
+        },
       ],
     },
     {
