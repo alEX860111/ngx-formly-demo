@@ -1,0 +1,13 @@
+<input #fileInput multiple (change)="onSelect($event)" type="file" [formControl]="formControl"
+  [formlyAttributes]="field">
+
+<button type="button" mat-raised-button color="primary" (click)=fileInput.click()>Upload file</button>
+
+<mat-list>
+  <mat-list-item *ngFor="let selectedFile of selectedFiles">
+      <mat-icon mat-list-icon>folder</mat-icon>
+      <h4 mat-line>{{selectedFile.file.name}}</h4>
+      <p mat-line> {{selectedFile.file.size | fileSize}} </p>
+    <mat-progress-bar matLine mode="determinate" [value]="selectedFile.progress"></mat-progress-bar>
+  </mat-list-item>
+</mat-list>

@@ -15,11 +15,15 @@ export interface StepType {
 export class AppComponent {
   activedStep = 0;
 
-  model = { addresses: [{}]};
+  model = { addresses: [{}] };
   steps: StepType[] = [
     {
       label: 'Personal data',
       fields: [
+        {
+          key: 'file',
+          type: 'file',
+        },
         {
           key: 'firstname',
           type: 'input',

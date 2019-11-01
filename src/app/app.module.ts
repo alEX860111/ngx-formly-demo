@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatListModule, MatProgressBarModule, MatIconModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,13 +10,16 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormlyFieldFile } from './file-type.component';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
 import { maxValidationMessage, minValidationMessage, requiredValidationMessage } from './validation-messages';
+import { HttpClientModule } from '@angular/common/http';
+import { FileSizePipe } from './file-size.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent, PanelWrapperComponent, RepeatTypeComponent
+    AppComponent, PanelWrapperComponent, RepeatTypeComponent, FormlyFieldFile, FileSizePipe
   ],
   imports: [
     BrowserAnimationsModule,
@@ -35,6 +38,7 @@ import { maxValidationMessage, minValidationMessage, requiredValidationMessage }
         ],
         types: [
           { name: 'repeat', component: RepeatTypeComponent },
+          { name: 'file', component: FormlyFieldFile },
         ],
       }
     ),
@@ -43,7 +47,11 @@ import { maxValidationMessage, minValidationMessage, requiredValidationMessage }
     MatButtonModule,
     MatStepperModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
