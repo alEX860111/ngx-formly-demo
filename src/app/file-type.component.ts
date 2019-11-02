@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { FieldType } from '@ngx-formly/material';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UploadService } from './upload-service';
+import { FieldType } from '@ngx-formly/material';
 import { SelectedFile } from './selected-file';
+import { UploadService } from './upload-service';
 
 @Component({
   selector: 'formly-field-file',
@@ -14,11 +14,14 @@ import { SelectedFile } from './selected-file';
 })
 export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
 
+  @ViewChild('fileInput', { static: true})
+  fileInput: ElementRef;
+
+  selectedFiles: SelectedFile[] = new Array<SelectedFile>();
+
   constructor(private uploadService: UploadService) {
     super();
   }
-
-  selectedFiles: SelectedFile[];
 
   onChange = (_) => { };
 
@@ -28,6 +31,11 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
   registerOnChange(fn: any) { this.onChange = fn; }
   registerOnTouched(fn: any) { this.onTouched = fn; }
 
+  onBrowseFiles() {
+    this.fileInput.nativeElement.value = null;
+    this.fileInput.nativeElement.click();
+  }
+
   onBlur() {
     console.log('blur');
     this.onTouched();
@@ -36,7 +44,6 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
   onSelect(event) {
     const fileList: FileList = event.target.files;
 
-    this.selectedFiles = new Array<SelectedFile>();
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList.item(i);
       const selectedFile: SelectedFile = {
@@ -45,7 +52,7 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
       };
       this.selectedFiles.push(selectedFile);
       this.uploadService.upload(file).subscribe(progress => {
-        this.selectedFiles[i].progress = progress;
+        this.selectedFiles[this.selectedFiles.length - 1].progress = progress;
       });
     }
 

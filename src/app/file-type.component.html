@@ -1,7 +1,7 @@
 <input #fileInput multiple (change)="onSelect($event)" type="file" [formControl]="formControl"
   [formlyAttributes]="field">
 
-<button type="button" mat-raised-button color="primary" (click)=fileInput.click()>Upload file</button>
+<button type="button" mat-raised-button color="primary" (click)=onBrowseFiles()>Browse files</button>
 
 <mat-list>
   <mat-list-item *ngFor="let selectedFile of selectedFiles">
