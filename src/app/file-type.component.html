@@ -3,14 +3,24 @@
 <div #dropzone class="dropzone">
   <mat-icon>arrow_drop_down_circle_outline</mat-icon>
   <div class="dropzone-text">drag and drop files here or</div>
-  <button #browseFilesButton type="button" mat-raised-button color="secondary" (click)=onBrowseFiles()>browse files</button>
+  <button #browseFilesButton type="button" mat-raised-button color="secondary" (click)=onBrowseFiles()>browse
+    files</button>
 </div>
 
 <mat-list>
   <mat-list-item *ngFor="let selectedFile of selectedFiles">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line>{{selectedFile.file.name}}</h4>
-      <p mat-line> {{selectedFile.file.size | fileSize}} </p>
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>
+      <div class="fileinfo">
+        <div>
+          <div class="filename">{{selectedFile.file.name}}</div>
+          <div class="filesize">{{selectedFile.file.size | fileSize}}</div>
+        </div>
+        <div>
+          <mat-icon *ngIf="selectedFile.progress === 100">done</mat-icon>
+        </div>
+      </div>
+    </div>
     <mat-progress-bar matLine mode="determinate" [value]="selectedFile.progress"></mat-progress-bar>
   </mat-list-item>
 </mat-list>

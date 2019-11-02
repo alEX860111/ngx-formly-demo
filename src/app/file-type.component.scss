@@ -4,6 +4,7 @@ input {
 
 .dropzone {
   border: 1px dashed black;
+  border-radius: 4px;
   text-align: center;
   padding: 50px;
 }
@@ -14,4 +15,18 @@ input {
 
 .dropzone-text {
   margin: 1em;
+}
+
+.fileinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filename {
+  font-weight: bold;
+}
+
+.filesize {
+  margin-bottom: 0.5em;
 }
