@@ -91,8 +91,9 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor, 
         progress: 0
       };
       this.selectedFiles.push(selectedFile);
+      const index = this.selectedFiles.length - 1;
       this.uploadService.upload(file).subscribe(progress => {
-        this.selectedFiles[this.selectedFiles.length - 1].progress = progress;
+        this.selectedFiles[index].progress = progress;
       });
     }
 
