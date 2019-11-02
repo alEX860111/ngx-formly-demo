@@ -1,3 +1,17 @@
 input {
   display: none;
 }
+
+.dropzone {
+  border: 1px dashed black;
+  text-align: center;
+  padding: 50px;
+}
+
+.is-dragover {
+  background-color: grey;
+}
+
+.dropzone-text {
+  margin: 1em;
+}

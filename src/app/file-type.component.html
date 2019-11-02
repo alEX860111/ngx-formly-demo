@@ -1,7 +1,10 @@
 <input #fileInput multiple (change)="onSelect($event)" type="file" [formControl]="formControl"
   [formlyAttributes]="field">
-
-<button type="button" mat-raised-button color="primary" (click)=onBrowseFiles()>Browse files</button>
+<div #dropzone class="dropzone">
+  <mat-icon>arrow_drop_down_circle_outline</mat-icon>
+  <div class="dropzone-text">drag and drop files here or</div>
+  <button #browseFilesButton type="button" mat-raised-button color="secondary" (click)=onBrowseFiles()>browse files</button>
+</div>
 
 <mat-list>
   <mat-list-item *ngFor="let selectedFile of selectedFiles">

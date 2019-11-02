@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldType } from '@ngx-formly/material';
 import { SelectedFile } from './selected-file';
 import { UploadService } from './upload-service';
+import { MatButton } from '@angular/material';
 
 @Component({
   selector: 'formly-field-file',
@@ -12,15 +13,51 @@ import { UploadService } from './upload-service';
     { provide: NG_VALUE_ACCESSOR, useExisting: FormlyFieldFile, multi: true },
   ]
 })
-export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
+export class FormlyFieldFile extends FieldType implements ControlValueAccessor, OnInit {
 
-  @ViewChild('fileInput', { static: true})
+  @ViewChild('fileInput', { static: true })
   fileInput: ElementRef;
+
+  @ViewChild('dropzone', { static: true })
+  dropzone: ElementRef;
+
+  @ViewChild('browseFilesButton', { static: true })
+  browseFilesButton: MatButton;
 
   selectedFiles: SelectedFile[] = new Array<SelectedFile>();
 
-  constructor(private uploadService: UploadService) {
+  constructor(private uploadService: UploadService, private renderer: Renderer2) {
     super();
+  }
+
+  ngOnInit() {
+    this.dropzone.nativeElement.addEventListener("dragenter", this.addDragoverClass.bind(this), false);
+    this.dropzone.nativeElement.addEventListener("dragover", this.addDragoverClass.bind(this), false);
+    this.dropzone.nativeElement.addEventListener("drop", this.onDrop.bind(this), false);
+    this.dropzone.nativeElement.addEventListener("dragleave", this.removeDragoverClass.bind(this), false);
+    this.dropzone.nativeElement.addEventListener("dragend", this.removeDragoverClass.bind(this), false);
+
+    super.ngOnInit();
+  }
+
+  private addDragoverClass(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.renderer.addClass(this.dropzone.nativeElement, 'is-dragover');
+    this.browseFilesButton.disabled = true;
+  }
+
+  private removeDragoverClass(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.renderer.removeClass(this.dropzone.nativeElement, 'is-dragover');
+    this.browseFilesButton.disabled = false;
+  }
+
+  private onDrop(event) {
+    this.removeDragoverClass(event);
+    const fileList: FileList = event.dataTransfer.files;
+    this.handleFileList(fileList);
   }
 
   onChange = (_) => { };
@@ -41,9 +78,12 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor {
     this.onTouched();
   }
 
-  onSelect(event) {
+  onSelect(event) { 
     const fileList: FileList = event.target.files;
+    this.handleFileList(fileList);
+  }
 
+  private handleFileList(fileList: FileList) {
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList.item(i);
       const selectedFile: SelectedFile = {
