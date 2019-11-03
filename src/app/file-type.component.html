@@ -17,7 +17,7 @@
           <div class="filesize">{{selectedFile.file.size | fileSize}}</div>
         </div>
         <div>
-          <mat-icon *ngIf="selectedFile.progress === 100">done</mat-icon>
+          <mat-icon *ngIf="selectedFile.uploadIsDone">done</mat-icon>
         </div>
       </div>
     </div>

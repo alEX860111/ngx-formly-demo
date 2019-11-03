@@ -86,15 +86,9 @@ export class FormlyFieldFile extends FieldType implements ControlValueAccessor, 
   private handleFileList(fileList: FileList) {
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList.item(i);
-      const selectedFile: SelectedFile = {
-        file: file,
-        progress: 0
-      };
+      const progressObservable = this.uploadService.upload(file);
+      const selectedFile: SelectedFile = new SelectedFile(file, progressObservable);
       this.selectedFiles.push(selectedFile);
-      const index = this.selectedFiles.length - 1;
-      this.uploadService.upload(file).subscribe(progress => {
-        this.selectedFiles[index].progress = progress;
-      });
     }
 
     this.onChange(this.selectedFiles.map(selectedFile => selectedFile.file));
