@@ -2,15 +2,6 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
 
-const cors = require('cors');
-
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
 app.use(fileUpload());
 
 app.post('/upload', function(req, res) {
@@ -25,7 +16,7 @@ app.post('/upload', function(req, res) {
       if (err) {
         return res.status(500).send(err);
       }
-      res.status(200).end();
+      res.location('http://my-file-location').status(200).end();
     });
   });
 

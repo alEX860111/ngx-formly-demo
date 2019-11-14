@@ -6,9 +6,7 @@ import {
   HttpResponse,
 } from '@angular/common/http'
 import { Observable, Subject } from 'rxjs';
-
-
-const url = 'http://localhost:8000/upload'
+import { UploadState } from './upload-state';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +14,7 @@ const url = 'http://localhost:8000/upload'
 export class UploadService {
   constructor(private http: HttpClient) { }
 
-  public upload(file: File): Observable<number> {
+  public upload(file: File, url: string): Observable<UploadState> {
 
     // create a new multipart-form for every file
     const formData: FormData = new FormData();
@@ -29,7 +27,7 @@ export class UploadService {
     });
 
     // create a new progress-subject for every file
-    const progress = new Subject<number>();
+    const progress = new Subject<UploadState>();
 
     // send the http-request and subscribe for progress-updates
     this.http.request(req).subscribe(event => {
@@ -39,11 +37,13 @@ export class UploadService {
         const percentDone = Math.round(100 * event.loaded / event.total);
 
         // pass the percentage into the progress-stream
-        progress.next(percentDone);
+        progress.next({ progress: percentDone });
       } else if (event instanceof HttpResponse) {
 
         // Close the progress-stream if we get an answer form the API
         // The upload is complete
+        progress.next({ progress: 100, location: event.headers.get('Location') });
+
         progress.complete();
       }
     });

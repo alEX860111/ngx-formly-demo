@@ -1,0 +1,18 @@
+<mat-list-item>
+  <mat-icon mat-list-icon>folder</mat-icon>
+  <div mat-line>
+    <div class="fileinfo">
+      <div>
+        <div class="filename">{{file.name}}</div>
+        <div class="filesize">{{file.size | fileSize}}</div>
+      </div>
+      <div class="actions">
+        <button matTooltip="Remove File" mat-icon-button (mouseenter)="onMouseenter()" (mouseleave)="onMouseleave()" (click)="removeFile()">
+          <mat-icon>{{actionIcon}}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-progress-bar *ngIf="progessSubscription" matLine mode="determinate" [value]="progress"></mat-progress-bar>
+  <formly-validation-message matLine [field]="field"></formly-validation-message>
+</mat-list-item>

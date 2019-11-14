@@ -1,0 +1,24 @@
+.fileinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filename {
+  font-weight: bold;
+}
+
+.filesize {
+  margin-bottom: 0.5em;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+formly-validation-message {
+  color: red;
+  font-size: 13px !important;
+}

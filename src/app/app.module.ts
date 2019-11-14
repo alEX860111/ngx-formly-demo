@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatListModule, MatProgressBarModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,35 +10,40 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormlyFieldFile } from './file-type.component';
+import { FileTypeComponent } from './file-type/file-type.component';
+import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
-import { maxValidationMessage, minValidationMessage, requiredValidationMessage } from './validation-messages';
-import { HttpClientModule } from '@angular/common/http';
-import { FileSizePipe } from './file-size.pipe';
+import { ValidationMessages } from './validation-messages';
 
 @NgModule({
   declarations: [
-    AppComponent, PanelWrapperComponent, RepeatTypeComponent, FormlyFieldFile, FileSizePipe
+    AppComponent, PanelWrapperComponent, RepeatTypeComponent
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FileTypeModule,
     FormlyModule.forRoot(
       {
         validationMessages: [
-          { name: 'required', message: requiredValidationMessage },
-          { name: 'min', message: minValidationMessage },
-          { name: 'max', message: maxValidationMessage },
+          { name: 'required', message: ValidationMessages.requiredValidationMessage },
+          { name: 'min', message: ValidationMessages.minValidationMessage },
+          { name: 'max', message: ValidationMessages.maxValidationMessage },
+          { name: 'filenameLength', message: ValidationMessages.filenameLengthMessage },
+          { name: 'filesize', message: ValidationMessages.filesizeMessage },
+          { name: 'minFiles', message: ValidationMessages.minFilesMessage },
+          { name: 'maxFiles', message: ValidationMessages.maxFilesMessage },
+          { name: 'totalFilesize', message: ValidationMessages.totalFilesizeMessage }
         ],
         wrappers: [
           { name: 'panel', component: PanelWrapperComponent },
         ],
         types: [
           { name: 'repeat', component: RepeatTypeComponent },
-          { name: 'file', component: FormlyFieldFile },
+          { name: 'file', component: FileTypeComponent },
         ],
       }
     ),
@@ -47,11 +52,7 @@ import { FileSizePipe } from './file-size.pipe';
     MatButtonModule,
     MatStepperModule,
     MatNativeDateModule,
-    MatCardModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatIconModule,
-    HttpClientModule
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

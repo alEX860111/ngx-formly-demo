@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { FormArray, FormGroup, Validators } from '@angular/forms';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { FileListValidators } from './file-type/file-list-validators';
+import { FileValidators } from './file-type/file-validators';
 
 export interface StepType {
   label: string;
@@ -13,6 +15,7 @@ export interface StepType {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   activedStep = 0;
 
   model = { addresses: [{}] };
@@ -21,8 +24,30 @@ export class AppComponent {
       label: 'Personal data',
       fields: [
         {
-          key: 'file',
+          key: 'pictures',
           type: 'file',
+          templateOptions: {
+            label: 'Pictures',
+            description: 'Upload some nice pictures',
+            required: true,
+            uploadUrl: '/upload'
+          },
+          validators: {
+            validation: [
+              Validators.required,
+              FileListValidators.minFiles(2),
+              FileListValidators.maxFiles(4),
+              FileListValidators.totalFilesize(400 * 1000)
+            ]
+          },
+          fieldArray: {
+            validators: {
+              validation: [
+                FileValidators.filenameLength(100),
+                FileValidators.filesize(1000 * 1000)
+              ]
+            }
+          }
         },
         {
           key: 'firstname',
