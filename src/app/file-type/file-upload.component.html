@@ -7,12 +7,12 @@
         <div class="filesize">{{file.size | fileSize}}</div>
       </div>
       <div class="actions">
-        <button matTooltip="Remove File" mat-icon-button (mouseenter)="onMouseenter()" (mouseleave)="onMouseleave()" (click)="removeFile()">
-          <mat-icon [svgIcon]="actionIcon"></mat-icon>
+        <button matTooltip="Remove File" mat-icon-button (mouseenter)="onActionIconMouseenter()" (mouseleave)="onActionIconMouseleave()" (click)="removeFile()">
+          <mat-icon [svgIcon]="getActionIcon()"></mat-icon>
         </button>
       </div>
     </div>
   </div>
-  <mat-progress-bar *ngIf="progessSubscription" matLine mode="determinate" [value]="progress"></mat-progress-bar>
+  <mat-progress-bar *ngIf="showProgressBar" matLine mode="determinate" [value]="progress"></mat-progress-bar>
   <formly-validation-message matLine [field]="field"></formly-validation-message>
 </mat-list-item>

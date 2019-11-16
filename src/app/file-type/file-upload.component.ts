@@ -23,9 +23,11 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   progress = 0;
 
-  actionIcon: string;
+  uploadError: string;
 
   file: File;
+
+  private actionIconIsHovered: boolean;
 
   private progessSubscription: Subscription;
 
@@ -34,8 +36,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     private uploadService: FileUploadService) { }
 
   ngOnInit() {
-    this.actionIcon = this.fileTypeConfig.removeFileIcon;
-
     const selectedFile: SelectedFile = this.field.formControl.value;
     this.file = selectedFile.file;
 
@@ -44,9 +44,14 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     }
 
     this.field.formControl.setAsyncValidators(() => {
+      if (this.uploadError) {
+        return of({ uploadError: true });
+      }
+
       if (this.progress === 100) {
         return of(null);
       }
+
       return of({ uploadInProgress: true });
     });
 
@@ -58,10 +63,12 @@ export class FileUploadComponent implements OnInit, OnDestroy {
           this.progress = uploadState.progress;
           if (this.progress === 100) {
             this.field.formControl.value.location = uploadState.location;
-            this.actionIcon = this.fileTypeConfig.uploadDoneIcon;
           }
         },
-        null,
+        error => {
+          this.uploadError = error;
+          this.field.formControl.updateValueAndValidity();
+        },
         () => this.field.formControl.updateValueAndValidity());
   }
 
@@ -74,14 +81,28 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     this.deleteFile.emit();
   }
 
-  onMouseenter() {
-    this.actionIcon = this.fileTypeConfig.removeFileIcon;
+  getActionIcon(): string {
+    if (this.actionIconIsHovered) {
+      return this.fileTypeConfig.removeFileIcon;
+    }
+
+    if (this.progress === 100 && !this.uploadError) {
+      return this.fileTypeConfig.uploadDoneIcon;
+    }
+
+    return this.fileTypeConfig.removeFileIcon
   }
 
-  onMouseleave() {
-    if (this.progress === 100) {
-      this.actionIcon = this.fileTypeConfig.uploadDoneIcon;
-    }
+  onActionIconMouseenter() {
+    this.actionIconIsHovered = true;
+  }
+
+  onActionIconMouseleave() {
+    this.actionIconIsHovered = false;
+  }
+
+  get showProgressBar(): boolean {
+    return this.progessSubscription && !this.uploadError;
   }
 
   private cancelUpload() {

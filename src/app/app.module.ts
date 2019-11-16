@@ -42,7 +42,8 @@ import { ValidationMessages } from './validation-messages';
           { name: 'filesize', message: ValidationMessages.filesizeMessage },
           { name: 'minFiles', message: ValidationMessages.minFilesMessage },
           { name: 'maxFiles', message: ValidationMessages.maxFilesMessage },
-          { name: 'totalFilesize', message: ValidationMessages.totalFilesizeMessage }
+          { name: 'totalFilesize', message: ValidationMessages.totalFilesizeMessage },
+          { name: 'uploadError', message: 'File Upload Error' }
         ],
         wrappers: [
           { name: 'panel', component: PanelWrapperComponent },
