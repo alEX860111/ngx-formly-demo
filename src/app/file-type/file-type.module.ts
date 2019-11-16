@@ -40,12 +40,7 @@ export class FileTypeModule {
     }
   }
 
-  static forRoot(config: FileTypeConfig = {
-    dropzoneIcon: 'file_copy',
-    removeFileIcon: 'close',
-    uploadDoneIcon: 'done',
-    fileIcon: 'folder'
-  }): ModuleWithProviders {
+  static forRoot(config: FileTypeConfig): ModuleWithProviders {
     return {
       ngModule: FileTypeModule,
       providers: [

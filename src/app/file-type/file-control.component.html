@@ -1,5 +1,5 @@
 <mat-list-item>
-  <mat-icon mat-list-icon>{{fileTypeConfig.fileIcon}}</mat-icon>
+  <mat-icon mat-list-icon [svgIcon]="fileTypeConfig.fileIcon"></mat-icon>
   <div mat-line>
     <div class="fileinfo">
       <div>
@@ -8,7 +8,7 @@
       </div>
       <div class="actions">
         <button matTooltip="Remove File" mat-icon-button (mouseenter)="onMouseenter()" (mouseleave)="onMouseleave()" (click)="removeFile()">
-          <mat-icon>{{actionIcon}}</mat-icon>
+          <mat-icon [svgIcon]="actionIcon"></mat-icon>
         </button>
       </div>
     </div>

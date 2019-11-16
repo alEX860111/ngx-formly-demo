@@ -2,14 +2,31 @@ import { InjectionToken } from '@angular/core';
 
 export const FILE_TYPE_CONFIG = new InjectionToken<FileTypeConfig>('FileTypeConfig');
 
-export interface FileTypeConfig {
+export const FILE_TYPE_ICON_NAMESPACE = 'FileTypeIcons';
 
-  dropzoneIcon: string;
+export class FileTypeConfig {
 
-  removeFileIcon: string;
+  readonly dropzoneIcon: string;
 
-  uploadDoneIcon: string;
+  readonly removeFileIcon: string;
 
-  fileIcon: string;
+  readonly uploadDoneIcon: string;
+
+  readonly fileIcon: string;
+
+  constructor(params: {
+    dropzoneIcon: string,
+
+    removeFileIcon: string,
+
+    uploadDoneIcon: string,
+
+    fileIcon: string
+  }) {
+    this.dropzoneIcon = `${FILE_TYPE_ICON_NAMESPACE}:${params.dropzoneIcon}`;
+    this.removeFileIcon = `${FILE_TYPE_ICON_NAMESPACE}:${params.removeFileIcon}`;
+    this.uploadDoneIcon = `${FILE_TYPE_ICON_NAMESPACE}:${params.uploadDoneIcon}`;
+    this.fileIcon = `${FILE_TYPE_ICON_NAMESPACE}:${params.fileIcon}`;
+  }
 
 }

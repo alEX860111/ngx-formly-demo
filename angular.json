@@ -25,7 +25,12 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@fortawesome/fontawesome-free/svgs",
+                "output": "/assets/svgs/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -91,7 +96,12 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@fortawesome/fontawesome-free/svgs",
+                "output": "/assets/svgs/"
+              }
             ],
             "styles": [
               "src/styles.scss"
@@ -125,6 +135,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "form-demo"
 }

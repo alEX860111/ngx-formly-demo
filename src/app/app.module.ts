@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatIconRegistry } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
@@ -15,6 +15,7 @@ import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
 import { ValidationMessages } from './validation-messages';
+import { FileTypeConfig, FILE_TYPE_ICON_NAMESPACE } from './file-type/file-type.config';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,12 @@ import { ValidationMessages } from './validation-messages';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FileTypeModule.forRoot(),
+    FileTypeModule.forRoot(new FileTypeConfig({
+      dropzoneIcon: 'dropzoneIcon',
+      fileIcon: 'fileIcon',
+      removeFileIcon: 'removeFileIcon',
+      uploadDoneIcon: 'uploadDoneIcon'
+    })),
     FormlyModule.forRoot(
       {
         validationMessages: [
@@ -57,4 +63,12 @@ import { ValidationMessages } from './validation-messages';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(matIconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'dropzoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file-import.svg'));
+    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'fileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file.svg'));
+    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'uploadDoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/check.svg'));
+    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'removeFileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/times.svg'));
+
+  }
+}
