@@ -6,15 +6,15 @@ import {
   HttpResponse,
 } from '@angular/common/http'
 import { Observable, Subject } from 'rxjs';
-import { UploadState } from './upload-state';
+import { FileUploadState } from './file-upload-state';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UploadService {
+export class FileUploadService {
   constructor(private http: HttpClient) { }
 
-  public upload(file: File, url: string): Observable<UploadState> {
+  public upload(file: File, url: string): Observable<FileUploadState> {
 
     // create a new multipart-form for every file
     const formData: FormData = new FormData();
@@ -27,7 +27,7 @@ export class UploadService {
     });
 
     // create a new progress-subject for every file
-    const progress = new Subject<UploadState>();
+    const progress = new Subject<FileUploadState>();
 
     // send the http-request and subscribe for progress-updates
     this.http.request(req).subscribe(event => {

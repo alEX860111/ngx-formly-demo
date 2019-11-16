@@ -1,4 +1,4 @@
-export interface UploadState {
+export interface FileUploadState {
 
   progress: number;
 

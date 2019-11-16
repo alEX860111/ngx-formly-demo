@@ -3,7 +3,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { of, Subscription } from 'rxjs';
 import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type.config';
 import { SelectedFile } from './selected-file';
-import { UploadService } from './upload-service';
+import { FileUploadService } from './file-upload.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -31,7 +31,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(FILE_TYPE_CONFIG) private fileTypeConfig: FileTypeConfig,
-    private uploadService: UploadService) { }
+    private uploadService: FileUploadService) { }
 
   ngOnInit() {
     this.actionIcon = this.fileTypeConfig.removeFileIcon;
