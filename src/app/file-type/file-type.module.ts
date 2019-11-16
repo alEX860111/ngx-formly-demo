@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormlyModule } from '@ngx-formly/core';
-import { FileControlComponent } from './file-control.component';
+import { FileUploadComponent } from './file-upload.component';
 import { FileInputComponent } from './file-input.component';
 import { FileSizePipe } from './file-size.pipe';
 import { FileTypeComponent } from './file-type.component';
@@ -26,7 +26,7 @@ import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type.config';
   ],
   declarations: [
     FileTypeComponent,
-    FileControlComponent,
+    FileUploadComponent,
     FileSizePipe,
     FileInputComponent
   ]

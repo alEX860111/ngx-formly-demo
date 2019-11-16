@@ -6,11 +6,11 @@ import { SelectedFile } from './selected-file';
 import { UploadService } from './upload-service';
 
 @Component({
-  selector: 'app-file-control',
-  templateUrl: './file-control.component.html',
-  styleUrls: ['./file-control.component.scss']
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrls: ['./file-upload.component.scss']
 })
-export class FileControlComponent implements OnInit, OnDestroy {
+export class FileUploadComponent implements OnInit, OnDestroy {
 
   @Input()
   field: FormlyFieldConfig;
