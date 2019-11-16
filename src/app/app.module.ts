@@ -11,11 +11,11 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileTypeComponent } from './file-type/file-type.component';
+import { FileTypeConfig, FILE_TYPE_ICON_NAMESPACE } from './file-type/file-type.config';
 import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
 import { ValidationMessages } from './validation-messages';
-import { FileTypeConfig, FILE_TYPE_ICON_NAMESPACE } from './file-type/file-type.config';
 
 @NgModule({
   declarations: [
@@ -63,12 +63,11 @@ import { FileTypeConfig, FILE_TYPE_ICON_NAMESPACE } from './file-type/file-type.
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(matIconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'dropzoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file-import.svg'));
     matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'fileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file.svg'));
     matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'uploadDoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/check.svg'));
     matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'removeFileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/times.svg'));
-
   }
 }
