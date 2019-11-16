@@ -1,16 +1,9 @@
-import { Injectable } from '@angular/core'
-import {
-  HttpClient,
-  HttpRequest,
-  HttpEventType,
-  HttpResponse,
-} from '@angular/common/http'
+import { HttpClient, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { FileUploadState } from './file-upload-state';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FileUploadService {
 
   constructor(private http: HttpClient) { }
