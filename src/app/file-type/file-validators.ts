@@ -19,8 +19,6 @@ export interface FilesizeError {
 
 export class FileValidators {
 
-  private static readonly FILE_NAME_REGEX = /^([\w,\s-]*)\.([A-Za-z]*)$/;
-
   static filenameLength(maxFilenameLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {
@@ -30,8 +28,7 @@ export class FileValidators {
       const selectedFile: SelectedFile = control.value;
       const file: File = selectedFile.file;
 
-      var match = FileValidators.FILE_NAME_REGEX.exec(file.name);
-      const filename = match[1];
+      const filename = file.name.substring(0, file.name.indexOf('.'));
 
       if (filename.length > maxFilenameLength) {
         const error: FilenameLengthError = {
