@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { of, Subscription } from 'rxjs';
-import { UploadService } from './upload-service';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type.config';
 import { SelectedFile } from './selected-file';
+import { UploadService } from './upload-service';
 
 @Component({
   selector: 'app-file-control',
@@ -22,15 +23,19 @@ export class FileControlComponent implements OnInit, OnDestroy {
 
   progress = 0;
 
-  actionIcon = 'close';
+  actionIcon: string;
 
   file: File;
 
   private progessSubscription: Subscription;
 
-  constructor(private uploadService: UploadService) { }
+  constructor(
+    @Inject(FILE_TYPE_CONFIG) private fileTypeConfig: FileTypeConfig,
+    private uploadService: UploadService) { }
 
   ngOnInit() {
+    this.actionIcon = this.fileTypeConfig.removeFileIcon;
+
     const selectedFile: SelectedFile = this.field.formControl.value;
     this.file = selectedFile.file;
 
@@ -53,7 +58,7 @@ export class FileControlComponent implements OnInit, OnDestroy {
           this.progress = uploadState.progress;
           if (this.progress === 100) {
             this.field.formControl.value.location = uploadState.location;
-            this.actionIcon = 'done';
+            this.actionIcon = this.fileTypeConfig.uploadDoneIcon;
           }
         },
         null,
@@ -70,12 +75,12 @@ export class FileControlComponent implements OnInit, OnDestroy {
   }
 
   onMouseenter() {
-    this.actionIcon = 'close';
+    this.actionIcon = this.fileTypeConfig.removeFileIcon;
   }
 
   onMouseleave() {
     if (this.progress === 100) {
-      this.actionIcon = 'done';
+      this.actionIcon = this.fileTypeConfig.uploadDoneIcon;
     }
   }
 

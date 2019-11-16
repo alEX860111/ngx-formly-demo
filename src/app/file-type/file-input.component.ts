@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type.config';
 import { SelectedFile } from './selected-file';
 
 @Component({
@@ -21,9 +22,12 @@ export class FileInputComponent implements OnInit {
   @Output()
   selectFiles = new EventEmitter<SelectedFile[]>();
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2,
+    @Inject(FILE_TYPE_CONFIG) private fileTypeConfig: FileTypeConfig) { }
 
   ngOnInit() {
+    console.log(this.fileTypeConfig);
     this.dropzone.nativeElement.addEventListener('dragenter', this.addDragoverClass.bind(this), false);
     this.dropzone.nativeElement.addEventListener('dragover', this.addDragoverClass.bind(this), false);
     this.dropzone.nativeElement.addEventListener('drop', this.onDrop.bind(this), false);

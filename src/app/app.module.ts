@@ -25,7 +25,7 @@ import { ValidationMessages } from './validation-messages';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FileTypeModule,
+    FileTypeModule.forRoot(),
     FormlyModule.forRoot(
       {
         validationMessages: [
