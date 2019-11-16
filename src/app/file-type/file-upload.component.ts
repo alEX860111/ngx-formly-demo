@@ -33,7 +33,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   private progessSubscription: Subscription;
 
   constructor(
-    @Inject(FILE_TYPE_CONFIG) private fileTypeConfig: FileTypeConfig,
+    @Inject(FILE_TYPE_CONFIG) public fileTypeConfig: FileTypeConfig,
     private uploadService: FileUploadService) { }
 
   ngOnInit() {
