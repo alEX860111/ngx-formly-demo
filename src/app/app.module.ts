@@ -32,12 +32,14 @@ import { ValidationMessages } from './validation-messages';
           { name: 'required', message: ValidationMessages.requiredValidationMessage },
           { name: 'min', message: ValidationMessages.minValidationMessage },
           { name: 'max', message: ValidationMessages.maxValidationMessage },
+          { name: 'filenameInvalid', message: ValidationMessages.filenameInvalidMessage },
           { name: 'filenameLength', message: ValidationMessages.filenameLengthMessage },
+          { name: 'fileExtension', message: ValidationMessages.fileExtensionMessage },
           { name: 'filesize', message: ValidationMessages.filesizeMessage },
           { name: 'minFiles', message: ValidationMessages.minFilesMessage },
           { name: 'maxFiles', message: ValidationMessages.maxFilesMessage },
           { name: 'totalFilesize', message: ValidationMessages.totalFilesizeMessage },
-          { name: 'uploadError', message: 'File Upload Error' }
+          { name: 'uploadError', message: ValidationMessages.uploadErrorMessage }
         ],
         wrappers: [
           { name: 'panel', component: PanelWrapperComponent },
