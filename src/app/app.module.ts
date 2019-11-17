@@ -11,7 +11,6 @@ import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileTypeComponent } from './file-type/file-type.component';
-import { FileTypeConfig, FILE_TYPE_ICON_NAMESPACE } from './file-type/file-type.config';
 import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
@@ -26,12 +25,7 @@ import { ValidationMessages } from './validation-messages';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FileTypeModule.forRoot(new FileTypeConfig({
-      dropzoneIcon: 'dropzoneIcon',
-      fileIcon: 'fileIcon',
-      removeFileIcon: 'removeFileIcon',
-      uploadDoneIcon: 'uploadDoneIcon'
-    })),
+    FileTypeModule,
     FormlyModule.forRoot(
       {
         validationMessages: [
@@ -66,9 +60,9 @@ import { ValidationMessages } from './validation-messages';
 })
 export class AppModule {
   constructor(matIconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'dropzoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file-import.svg'));
-    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'fileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file.svg'));
-    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'uploadDoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/check.svg'));
-    matIconRegistry.addSvgIconInNamespace(FILE_TYPE_ICON_NAMESPACE, 'removeFileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/times.svg'));
+    matIconRegistry.addSvgIconInNamespace('fileType', 'dropzoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file-import.svg'));
+    matIconRegistry.addSvgIconInNamespace('fileType', 'fileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/file.svg'));
+    matIconRegistry.addSvgIconInNamespace('fileType', 'uploadDoneIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/check.svg'));
+    matIconRegistry.addSvgIconInNamespace('fileType', 'removeFileIcon', sanitizer.bypassSecurityTrustResourceUrl('assets/svgs/solid/times.svg'));
   }
 }
