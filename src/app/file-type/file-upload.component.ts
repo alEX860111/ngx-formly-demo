@@ -27,13 +27,15 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   file: File;
 
-  private actionIconIsHovered: boolean;
+  fileIcon: string;
 
   private progessSubscription: Subscription;
 
   constructor(private uploadService: FileUploadService) { }
 
   ngOnInit() {
+    this.fileIcon = this.uploadUrl ? 'fileType:fileUpload' : 'fileType:file';
+
     const selectedFile: SelectedFile = this.field.formControl.value;
     this.file = selectedFile.file;
 
@@ -67,7 +69,12 @@ export class FileUploadComponent implements OnInit, OnDestroy {
           this.uploadError = error;
           this.field.formControl.updateValueAndValidity();
         },
-        () => this.field.formControl.updateValueAndValidity());
+        () => {
+          this.field.formControl.updateValueAndValidity();
+          if (this.progress === 100 && !this.uploadError) {
+            this.fileIcon = 'fileType:file';
+          }
+        });
   }
 
   ngOnDestroy() {
@@ -77,26 +84,6 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   removeFile() {
     this.cancelUpload();
     this.deleteFile.emit();
-  }
-
-  getActionIcon(): string {
-    if (this.actionIconIsHovered) {
-      return 'fileType:removeFileIcon';
-    }
-
-    if (this.progress === 100 && !this.uploadError) {
-      return 'fileType:uploadDoneIcon';
-    }
-
-    return 'fileType:removeFileIcon'
-  }
-
-  onActionIconMouseenter() {
-    this.actionIconIsHovered = true;
-  }
-
-  onActionIconMouseleave() {
-    this.actionIconIsHovered = false;
   }
 
   get showProgressBar(): boolean {

@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormlyModule } from '@ngx-formly/core';
 import { FileInputComponent } from './file-input.component';
 import { FileSizePipe } from './file-size.pipe';
@@ -18,7 +17,6 @@ import { FileUploadComponent } from './file-upload.component';
     HttpClientModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
     MatListModule,
     MatProgressBarModule,
     FormlyModule,
