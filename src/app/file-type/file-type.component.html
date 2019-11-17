@@ -5,7 +5,7 @@
 
 <app-file-input (selectFiles)="onSelectFiles($event)"></app-file-input>
 
-<div class="label">{{field.templateOptions.description}}</div>
+<div *ngIf="!field.formControl.touched || field.formControl.valid" class="label">{{field.templateOptions.description}}</div>
 <ng-container *ngIf="field.formControl.touched">
   <formly-validation-message [field]="field"></formly-validation-message>
 </ng-container>

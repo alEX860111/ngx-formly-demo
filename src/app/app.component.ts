@@ -57,6 +57,7 @@ export class AppComponent {
           type: 'input',
           templateOptions: {
             label: 'First name',
+            description: 'Your first name',
             required: true,
           },
         },
