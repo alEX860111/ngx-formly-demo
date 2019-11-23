@@ -3,7 +3,7 @@ import { MaxFilesError } from './file-type/list-validators/max-files-error';
 import { MinFilesError } from './file-type/list-validators/min-files-error';
 import { TotalFilesizeError } from './file-type/list-validators/total-filesize-error';
 import { FileExtensionError } from './file-type/validators/file-extension-error';
-import { FilenameLengthError } from './file-type/validators/filename-length-error';
+import { MaxFilenameLengthError } from './file-type/validators/max-filename-length-error';
 import { FilesizeError } from './file-type/validators/filesize-error';
 
 export class ValidationMessages {
@@ -22,7 +22,7 @@ export class ValidationMessages {
     return `This value should be less than ${field.templateOptions.max}`;
   }
 
-  static filenameLengthMessage(err: FilenameLengthError) {
+  static maxFilenameLengthMessage(err: MaxFilenameLengthError) {
     return `The filename is too long. Allowed characters: ${err.maxFilenameLength}`;
   }
 

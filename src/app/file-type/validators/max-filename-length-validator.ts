@@ -1,8 +1,8 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { FilenameLengthError } from './filename-length-error';
+import { MaxFilenameLengthError } from './max-filename-length-error';
 import { SelectedFile } from '../selected-file';
 
-export class FilenameLengthValidator {
+export class MaxFilenameLengthValidator {
 
   constructor(private readonly maxFilenameLength: number) { }
 
@@ -17,21 +17,21 @@ export class FilenameLengthValidator {
     const index = file.name.lastIndexOf('.');
 
     if (index === -1) {
-      const error: FilenameLengthError = {
+      const error: MaxFilenameLengthError = {
         maxFilenameLength: this.maxFilenameLength,
         acturalFilenameLength: undefined
       };
-      return { filenameLength: error };
+      return { maxFilenameLength: error };
     }
 
     const filename = file.name.substring(0, index);
 
     if (filename.length > this.maxFilenameLength) {
-      const error: FilenameLengthError = {
+      const error: MaxFilenameLengthError = {
         maxFilenameLength: this.maxFilenameLength,
         acturalFilenameLength: filename.length
       };
-      return { filenameLength: error };
+      return { maxFilenameLength: error };
     }
 
     return null;

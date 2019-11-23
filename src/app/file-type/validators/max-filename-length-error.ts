@@ -1,4 +1,4 @@
-export interface FilenameLengthError {
+export interface MaxFilenameLengthError {
 
   maxFilenameLength: number;
 

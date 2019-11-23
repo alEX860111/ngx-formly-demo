@@ -43,7 +43,7 @@ export class AppComponent {
           fieldArray: {
             validators: {
               validation: [
-                FileValidators.filenameLength(50),
+                FileValidators.maxFilenameLength(50),
                 FileValidators.fileExtension(['pdf', 'txt', 'png']),
                 FileValidators.filesize(1000 * 1000)
               ]
