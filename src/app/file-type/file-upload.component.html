@@ -7,7 +7,7 @@
         <div class="filesize">{{file.size | fileSize}}</div>
       </div>
       <div>
-        <button mat-icon-button (click)="removeFile()">
+        <button mat-icon-button [matTooltip]="fileTypeConfig.removeFileTooltip" (click)="removeFile()">
           <mat-icon svgIcon="fileType:fileRemove"></mat-icon>
         </button>
       </div>

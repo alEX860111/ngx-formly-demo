@@ -25,7 +25,11 @@ import { ValidationMessages } from './validation-messages';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FileTypeModule,
+    FileTypeModule.forRoot({
+      // dropzoneText: 'Dateien hier ablegen oder',
+      // browseFilesButtonText: 'Dateien durchsuchen',
+      // removeFileTooltip: 'Datei entfernen'
+    }),
     FormlyModule.forRoot(
       {
         validationMessages: [

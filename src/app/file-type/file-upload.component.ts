@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Inject } from '@angular/core';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { of, Subscription } from 'rxjs';
 import { FileUploadService } from './file-upload.service';
 import { SelectedFile } from './selected-file';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 
 @Component({
   selector: 'app-file-upload',
@@ -31,7 +32,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   private progessSubscription: Subscription;
 
-  constructor(private uploadService: FileUploadService) { }
+  constructor(
+    @Inject(FILE_TYPE_CONFIG) public fileTypeConfig: FileTypeConfig,
+    private uploadService: FileUploadService) { }
 
   ngOnInit() {
     this.fileIcon = this.uploadUrl ? 'fileType:fileUpload' : 'fileType:file';
