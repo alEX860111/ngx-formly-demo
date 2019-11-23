@@ -4,7 +4,12 @@ import { FileExtensionError } from './file-extension-error';
 
 export class FileExtensionValidator {
 
-  constructor(private allowedFileExtensions: string[]) { }
+  private readonly uppercasedAllowedFileExtensions: string[];
+
+  constructor(private allowedFileExtensions: string[]) {
+    this.uppercasedAllowedFileExtensions = allowedFileExtensions
+      .map(extension => extension.toUpperCase());
+  }
 
   validate(control: AbstractControl): ValidationErrors | null {
     if (!control.value) {
@@ -26,9 +31,7 @@ export class FileExtensionValidator {
 
     const fileExtension = file.name.substring(index + 1);
 
-    if (!this.allowedFileExtensions
-      .map(extension => extension.toUpperCase())
-      .includes(fileExtension.toUpperCase())) {
+    if (!this.uppercasedAllowedFileExtensions.includes(fileExtension.toUpperCase())) {
       const error: FileExtensionError = {
         allowedFileExtensions: this.allowedFileExtensions,
         actualFileExtension: fileExtension
