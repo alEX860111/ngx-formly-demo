@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { MatButton } from '@angular/material';
 import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 import { SelectedFile } from './selected-file';
 
@@ -16,16 +15,12 @@ export class FileInputComponent implements OnInit {
   @ViewChild('dropzone', { static: true })
   dropzone: ElementRef;
 
-  @ViewChild('browseFilesButton', { static: true })
-  browseFilesButton: MatButton;
-
   @Output()
   selectFiles = new EventEmitter<SelectedFile[]>();
 
   constructor(
     private renderer: Renderer2,
     @Inject(FILE_TYPE_CONFIG) public fileTypeConfig: FileTypeConfig) { }
-
 
   ngOnInit() {
     this.dropzone.nativeElement.addEventListener('dragenter', this.addDragoverClass.bind(this), false);
@@ -40,17 +35,15 @@ export class FileInputComponent implements OnInit {
     event.stopPropagation();
     event.preventDefault();
     this.renderer.addClass(this.dropzone.nativeElement, 'is-dragover');
-    this.browseFilesButton.disabled = true;
   }
 
   private removeDragoverClass(event: Event) {
     event.stopPropagation();
     event.preventDefault();
     this.renderer.removeClass(this.dropzone.nativeElement, 'is-dragover');
-    this.browseFilesButton.disabled = false;
   }
 
-  private onDrop(event) {
+  private onDrop(event: any) {
     this.removeDragoverClass(event);
     const fileList: FileList = event.dataTransfer.files;
     this.handleFileList(fileList);
@@ -61,7 +54,7 @@ export class FileInputComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  onChange(event) {
+  onChange(event: any) {
     const fileList: FileList = event.target.files;
     this.handleFileList(fileList);
   }
