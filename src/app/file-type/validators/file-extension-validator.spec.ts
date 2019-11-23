@@ -3,11 +3,13 @@ import { FileExtensionValidator } from './file-extension-validator';
 import { FileExtensionError } from './file-extension-error';
 import { SelectedFile } from '../selected-file';
 
-describe('FileValidators', () => {
+describe('FileExtensionValidator', () => {
+
+  const ALLOWED_FILE_EXTENSIONS = ['pdf', 'txt'];
 
   let validator: FileExtensionValidator;
 
-  beforeEach(() => validator = new FileExtensionValidator(['pdf', 'txt']));
+  beforeEach(() => validator = new FileExtensionValidator(ALLOWED_FILE_EXTENSIONS));
 
   it('should return null', () => {
     const selectedFile: SelectedFile = { file: new File([], '.txt') };
@@ -25,7 +27,7 @@ describe('FileValidators', () => {
     const selectedFile: SelectedFile = { file: new File([], '.png') };
     const control = new FormControl(selectedFile);
     const error: FileExtensionError = {
-      allowedFileExtensions: ['pdf', 'txt'],
+      allowedFileExtensions: ALLOWED_FILE_EXTENSIONS,
       actualFileExtension: 'png'
     };
     expect(validator.validate(control)).toEqual({ fileExtension: error });
@@ -35,7 +37,7 @@ describe('FileValidators', () => {
     const selectedFile: SelectedFile = { file: new File([], 'foo') };
     const control = new FormControl(selectedFile);
     const error: FileExtensionError = {
-      allowedFileExtensions: ['pdf', 'txt'],
+      allowedFileExtensions: ALLOWED_FILE_EXTENSIONS,
       actualFileExtension: undefined
     };
     expect(validator.validate(control)).toEqual({ fileExtension: error });

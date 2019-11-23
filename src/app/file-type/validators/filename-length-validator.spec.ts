@@ -5,10 +5,12 @@ import { SelectedFile } from '../selected-file';
 
 describe('FilenameLengthValidator', () => {
 
+  const MAX_FILENAME_LENGTH = 5;
+
   let validator: FilenameLengthValidator;
 
   beforeEach(() => {
-    validator = new FilenameLengthValidator(5);
+    validator = new FilenameLengthValidator(MAX_FILENAME_LENGTH);
   });
 
   it('should return null', () => {
@@ -27,7 +29,7 @@ describe('FilenameLengthValidator', () => {
     const selectedFile: SelectedFile = { file: new File([], '123456.txt') };
     const control = new FormControl(selectedFile);
     const error: FilenameLengthError = {
-      maxFilenameLength: 5,
+      maxFilenameLength: MAX_FILENAME_LENGTH,
       acturalFilenameLength: 6
     };
     expect(validator.validate(control)).toEqual({ filenameLength: error });
@@ -37,7 +39,7 @@ describe('FilenameLengthValidator', () => {
     const selectedFile: SelectedFile = { file: new File([], '123456') };
     const control = new FormControl(selectedFile);
     const error: FilenameLengthError = {
-      maxFilenameLength: 5,
+      maxFilenameLength: MAX_FILENAME_LENGTH,
       acturalFilenameLength: undefined
     };
     expect(validator.validate(control)).toEqual({ filenameLength: error });

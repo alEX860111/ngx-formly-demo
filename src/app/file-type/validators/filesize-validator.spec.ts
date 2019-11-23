@@ -3,27 +3,29 @@ import { FilesizeError } from './filesize-error';
 import { FilesizeValidator } from './filesize-validator';
 import { SelectedFile } from '../selected-file';
 
-describe('FileValidators', () => {
+describe('FilesizeValidator', () => {
 
-    let validator: FilesizeValidator;
+  const MAX_TOTAL_FILESIZE = 1;
 
-    beforeEach(() => validator = new FilesizeValidator(1));
+  let validator: FilesizeValidator;
 
-    it('should return null', () => {
-      const selectedFile: SelectedFile = { file: new File([], '.txt') };
-      const control = new FormControl(selectedFile);
-      expect(validator.validate(control)).toBeNull();
-    });
+  beforeEach(() => validator = new FilesizeValidator(MAX_TOTAL_FILESIZE));
 
-    it('should return FilesizeError if file is too big', () => {
-      const blob: Blob = new Blob(['hello world']);
-      const selectedFile: SelectedFile = { file: new File([blob], '.txt') };
-      const control = new FormControl(selectedFile);
-      const error: FilesizeError = {
-        maxFilesize: 1,
-        actualFilesize: blob.size
-      };
-      expect(validator.validate(control)).toEqual({ filesize: error });
-    });
+  it('should return null', () => {
+    const selectedFile: SelectedFile = { file: new File([], '.txt') };
+    const control = new FormControl(selectedFile);
+    expect(validator.validate(control)).toBeNull();
+  });
+
+  it('should return FilesizeError if file is too big', () => {
+    const blob: Blob = new Blob(['foo']);
+    const selectedFile: SelectedFile = { file: new File([blob], '.txt') };
+    const control = new FormControl(selectedFile);
+    const error: FilesizeError = {
+      maxFilesize: MAX_TOTAL_FILESIZE,
+      actualFilesize: blob.size
+    };
+    expect(validator.validate(control)).toEqual({ filesize: error });
+  });
 
 });
