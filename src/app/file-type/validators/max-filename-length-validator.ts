@@ -6,7 +6,7 @@ export class MaxFilenameLengthValidator {
 
   constructor(private readonly maxFilenameLength: number) { }
 
-  validate (control: AbstractControl): ValidationErrors | null {
+  validate(control: AbstractControl): ValidationErrors | null {
     if (!control.value) {
       return null;
     }
@@ -36,5 +36,5 @@ export class MaxFilenameLengthValidator {
 
     return null;
   }
-  
+
 }
