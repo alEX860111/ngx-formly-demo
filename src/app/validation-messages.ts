@@ -1,6 +1,8 @@
-import { FileExtensionError } from './file-type/validators/file-extension-error';
-import { MaxFilesError, MinFilesError, TotalFilesizeError } from './file-type/list-validators/file-list-validators';
 import { FileSizePipe } from './file-type/file-size.pipe';
+import { MaxFilesError } from './file-type/list-validators/max-files-error';
+import { MinFilesError } from './file-type/list-validators/min-files-error';
+import { TotalFilesizeError } from './file-type/list-validators/total-filesize-error';
+import { FileExtensionError } from './file-type/validators/file-extension-error';
 import { FilenameLengthError } from './file-type/validators/filename-length-error';
 import { FilesizeError } from './file-type/validators/filesize-error';
 
