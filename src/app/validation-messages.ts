@@ -1,6 +1,8 @@
-import { MaxFilesError, MinFilesError, TotalFilesizeError } from './file-type/file-list-validators';
+import { FileExtensionError } from './file-type/validators/file-extension-error';
+import { MaxFilesError, MinFilesError, TotalFilesizeError } from './file-type/list-validators/file-list-validators';
 import { FileSizePipe } from './file-type/file-size.pipe';
-import { FileExtensionError, FilenameLengthError, FilesizeError } from './file-type/file-validators';
+import { FilenameLengthError } from './file-type/validators/filename-length-error';
+import { FilesizeError } from './file-type/validators/filesize-error';
 
 export class ValidationMessages {
 

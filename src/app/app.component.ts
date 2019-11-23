@@ -1,8 +1,8 @@
-import { AfterContentChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormArray, FormGroup, Validators } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { FileListValidators } from './file-type/file-list-validators';
-import { FileValidators } from './file-type/file-validators';
+import { FileListValidators } from './file-type/list-validators/file-list-validators';
+import { FileValidators } from './file-type/validators/file-validators';
 
 export interface StepType {
   label: string;

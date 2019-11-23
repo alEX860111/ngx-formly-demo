@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { SelectedFile } from './selected-file';
+import { SelectedFile } from '../selected-file';
 
 export interface MinFilesError {
 
