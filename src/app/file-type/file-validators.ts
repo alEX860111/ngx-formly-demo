@@ -1,20 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { SelectedFile } from './selected-file';
 
-export interface FilenameSpecification {
-
-  maxFilenameLength?: number;
-
-  allowedFileExtensions?: string[];
-
-}
-
-export interface FilenameInvalidError {
-
-  actualFilename: string;
-
-}
-
 export interface FilenameLengthError {
 
   maxFilenameLength: number;
@@ -25,9 +11,9 @@ export interface FilenameLengthError {
 
 export interface FileExtensionError {
 
-  actualFileExtension: string;
-
   allowedFileExtensions: string[];
+  
+  actualFileExtension: string;
 
 }
 
@@ -41,9 +27,7 @@ export interface FilesizeError {
 
 export class FileValidators {
 
-  private static readonly FILE_NAME_REGEX = /^([\w-]+)\.([A-Za-z]+)$/;
-
-  static filename(filenameSpecification: FilenameSpecification): ValidatorFn {
+  static filenameLength(maxFilenameLength: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {
         return null;
@@ -52,25 +36,55 @@ export class FileValidators {
       const selectedFile: SelectedFile = control.value;
       const file: File = selectedFile.file;
 
-      const match = this.FILE_NAME_REGEX.exec(file.name);
+      const index = file.name.lastIndexOf('.');
 
-      if (!match) {
-        const error: FilenameInvalidError = { actualFilename: file.name };
-        return { filenameInvalid: error };
-      }
-
-      if (filenameSpecification.maxFilenameLength && match[1].length > filenameSpecification.maxFilenameLength) {
+      if (index === -1) {
         const error: FilenameLengthError = {
-          maxFilenameLength: filenameSpecification.maxFilenameLength,
-          acturalFilenameLength: match[1].length
+          maxFilenameLength,
+          acturalFilenameLength: undefined
         };
         return { filenameLength: error };
       }
 
-      if (filenameSpecification.allowedFileExtensions && !filenameSpecification.allowedFileExtensions.includes(match[2])) {
+      const filename = file.name.substring(0, index);
+
+      if (filename.length > maxFilenameLength) {
+        const error: FilenameLengthError = {
+          maxFilenameLength,
+          acturalFilenameLength: filename.length
+        };
+        return { filenameLength: error };
+      }
+
+      return null;
+    };
+  }
+
+  static fileExtension(allowedFileExtensions?: string[]): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      const selectedFile: SelectedFile = control.value;
+      const file: File = selectedFile.file;
+
+      const index = file.name.lastIndexOf('.');
+
+      if (index === -1) {
         const error: FileExtensionError = {
-          actualFileExtension: match[2],
-          allowedFileExtensions: filenameSpecification.allowedFileExtensions
+          allowedFileExtensions,
+          actualFileExtension: undefined
+        };
+        return { fileExtension: error };
+      }
+
+      const fileExtension = file.name.substring(index + 1);
+
+      if (!allowedFileExtensions.includes(fileExtension)) {
+        const error: FileExtensionError = {
+          allowedFileExtensions,
+          actualFileExtension: fileExtension
         };
         return { fileExtension: error };
       }

@@ -32,7 +32,6 @@ import { ValidationMessages } from './validation-messages';
           { name: 'required', message: ValidationMessages.requiredValidationMessage },
           { name: 'min', message: ValidationMessages.minValidationMessage },
           { name: 'max', message: ValidationMessages.maxValidationMessage },
-          { name: 'filenameInvalid', message: ValidationMessages.filenameInvalidMessage },
           { name: 'filenameLength', message: ValidationMessages.filenameLengthMessage },
           { name: 'fileExtension', message: ValidationMessages.fileExtensionMessage },
           { name: 'filesize', message: ValidationMessages.filesizeMessage },

@@ -18,10 +18,6 @@ export class ValidationMessages {
     return `This value should be less than ${field.templateOptions.max}`;
   }
 
-  static filenameInvalidMessage() {
-    return 'The file name is invalid';
-  }
-
   static filenameLengthMessage(err: FilenameLengthError) {
     return `The filename is too long. Allowed characters: ${err.maxFilenameLength}`;
   }
@@ -30,7 +26,7 @@ export class ValidationMessages {
     const allowedFileExtensions = err.allowedFileExtensions
       .map(ext => `'${ext}'`)
       .join(', ');
-    return `The file extension '${err.actualFileExtension}' is invalid. Allowed extensions are: ${allowedFileExtensions}`;
+    return `The file extension '${err.actualFileExtension}' is not allowed. Allowed extensions are: ${allowedFileExtensions}`;
   }
 
   static filesizeMessage(err: FilesizeError) {
