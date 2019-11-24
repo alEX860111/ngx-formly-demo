@@ -6,7 +6,7 @@ export class FileExtensionValidator {
 
   private readonly uppercasedAllowedFileExtensions: string[];
 
-  constructor(private allowedFileExtensions: string[]) {
+  constructor(private readonly allowedFileExtensions: string[]) {
     this.uppercasedAllowedFileExtensions = allowedFileExtensions
       .map(extension => extension.toUpperCase());
   }

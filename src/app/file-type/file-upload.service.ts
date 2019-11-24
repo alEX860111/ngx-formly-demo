@@ -6,7 +6,7 @@ import { FileUploadState } from './file-upload-state';
 @Injectable()
 export class FileUploadService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   public upload(file: File, url: string): Observable<FileUploadState> {
     const formData: FormData = new FormData();
@@ -36,4 +36,5 @@ export class FileUploadService {
 
     return progress.asObservable();
   }
+
 }

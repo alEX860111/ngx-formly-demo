@@ -19,8 +19,8 @@ export class FileInputComponent implements OnInit {
   selectFiles = new EventEmitter<SelectedFile[]>();
 
   constructor(
-    private renderer: Renderer2,
-    @Inject(FILE_TYPE_CONFIG) public fileTypeConfig: FileTypeConfig) { }
+    private readonly renderer: Renderer2,
+    @Inject(FILE_TYPE_CONFIG) public readonly fileTypeConfig: FileTypeConfig) { }
 
   ngOnInit() {
     this.dropzone.nativeElement.addEventListener('dragenter', this.addDragoverClass.bind(this), false);
