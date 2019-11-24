@@ -12,3 +12,7 @@ formly-validation-message {
   color: red;
   font-size: 12px !important;
 }
+
+:host {
+  display: block;
+}
