@@ -1,12 +1,18 @@
 import { ValidatorFn } from '@angular/forms';
 import { FileExtensionValidator } from './file-extension-validator';
-import { MaxFilenameLengthValidator } from './max-filename-length-validator';
 import { FilesizeValidator } from './filesize-validator';
+import { MaxFilenameLengthValidator } from './max-filename-length-validator';
+import { MinFilenameLengthValidator } from './min-filename-length-validator';
 
 export class FileValidators {
 
   static maxFilenameLength(maxFilenameLength: number): ValidatorFn {
     const validator = new MaxFilenameLengthValidator(maxFilenameLength);
+    return validator.validate.bind(validator);
+  }
+
+  static minFilenameLength(minFilenameLength: number): ValidatorFn {
+    const validator = new MinFilenameLengthValidator(minFilenameLength);
     return validator.validate.bind(validator);
   }
 

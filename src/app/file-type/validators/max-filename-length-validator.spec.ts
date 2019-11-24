@@ -3,7 +3,7 @@ import { MaxFilenameLengthError } from './max-filename-length-error';
 import { MaxFilenameLengthValidator } from './max-filename-length-validator';
 import { SelectedFile } from '../selected-file';
 
-describe('FilenameLengthValidator', () => {
+describe('MaxFilenameLengthValidator', () => {
 
   const MAX_FILENAME_LENGTH = 5;
 
@@ -14,18 +14,18 @@ describe('FilenameLengthValidator', () => {
   });
 
   it('should return null', () => {
-    const selectedFile: SelectedFile = { file: new File([], '.txt') };
-    const control = new FormControl(selectedFile);
-    expect(validator.validate(control)).toBeNull();
-  });
-
-  it('should return null', () => {
     const selectedFile: SelectedFile = { file: new File([], '12345.txt') };
     const control = new FormControl(selectedFile);
     expect(validator.validate(control)).toBeNull();
   });
 
-  it('should return MaxFilenameLengthError if filename is too long', () => {
+  it('should return null if filename is blank', () => {
+    const selectedFile: SelectedFile = { file: new File([], '.txt') };
+    const control = new FormControl(selectedFile);
+    expect(validator.validate(control)).toBeNull();
+  });
+
+  it('should return MaxFilenameLengthError if filename is to long', () => {
     const selectedFile: SelectedFile = { file: new File([], '123456.txt') };
     const control = new FormControl(selectedFile);
     const error: MaxFilenameLengthError = {

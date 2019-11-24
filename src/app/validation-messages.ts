@@ -3,8 +3,9 @@ import { MaxFilesError } from './file-type/list-validators/max-files-error';
 import { MinFilesError } from './file-type/list-validators/min-files-error';
 import { TotalFilesizeError } from './file-type/list-validators/total-filesize-error';
 import { FileExtensionError } from './file-type/validators/file-extension-error';
-import { MaxFilenameLengthError } from './file-type/validators/max-filename-length-error';
 import { FilesizeError } from './file-type/validators/filesize-error';
+import { MaxFilenameLengthError } from './file-type/validators/max-filename-length-error';
+import { MinFilenameLengthError } from './file-type/validators/min-filename-length-error';
 
 export class ValidationMessages {
 
@@ -23,7 +24,11 @@ export class ValidationMessages {
   }
 
   static maxFilenameLengthMessage(err: MaxFilenameLengthError) {
-    return `The filename is too long. Allowed characters: ${err.maxFilenameLength}`;
+    return `The filename is to long. Max length: ${err.maxFilenameLength}`;
+  }
+
+  static minFilenameLengthMessage(err: MinFilenameLengthError) {
+    return `The filename is to short. Min length: ${err.minFilenameLength}`;
   }
 
   static fileExtensionMessage(err: FileExtensionError) {
