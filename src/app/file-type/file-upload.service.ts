@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, map, filter } from 'rxjs/operators';
+import { catchError, filter, map } from 'rxjs/operators';
 import { FileUploadState } from './file-upload-state';
 
 @Injectable()
@@ -13,10 +13,7 @@ export class FileUploadService {
     const request: HttpRequest<FormData> = this.createRequest(file, url);
 
     return this.http.request(request).pipe(
-      filter(event => {
-        return event.type === HttpEventType.UploadProgress
-          || event.type === HttpEventType.Response;
-      }),
+      filter(this.isSupportedEvent),
       map(this.createFileUploadState),
       catchError((error: HttpErrorResponse) => {
         throw error.statusText;
@@ -33,17 +30,24 @@ export class FileUploadService {
     });
   }
 
+  private isSupportedEvent(event: HttpEvent<unknown>): boolean {
+    return event.type === HttpEventType.UploadProgress || event.type === HttpEventType.Response;
+  }
+
   private createFileUploadState(event: HttpEvent<unknown>): FileUploadState {
     if (event.type === HttpEventType.UploadProgress) {
       const percentDone = Math.round(100 * event.loaded / event.total);
       return { progress: percentDone };
-    } else if (event instanceof HttpResponse) {
+    }
+
+    if (event.type === HttpEventType.Response) {
       if (event.ok) {
         return { progress: 100, location: event.headers.get('Location') };
       } else {
         throw event.statusText;
       }
     }
+
     throw 'upload error';
   }
 

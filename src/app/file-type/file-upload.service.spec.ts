@@ -28,7 +28,7 @@ describe('FileUploadService', () => {
     httpTestingController.verify();
   });
 
-  it('should upload file to url', (done) => {
+  it('should upload file to url', done => {
     const file: File = new File(['hello world'], 'foo.txt');
 
     let state: FileUploadState;
@@ -51,7 +51,7 @@ describe('FileUploadService', () => {
     req.flush('', { headers: new HttpHeaders({ Location: LOCATION }) });
   });
 
-  it('should upload file to url and handle error', (done) => {
+  it('should handle error', done => {
     const file: File = new File(['hello world'], 'foo.txt');
 
     let state: FileUploadState;
@@ -68,7 +68,7 @@ describe('FileUploadService', () => {
 
     expect(req.request.method).toEqual('POST');
 
-    req.flush('x', { status: 500, statusText: 'Internal Server Error' });
+    req.flush('', { status: 500, statusText: 'Internal Server Error' });
   });
 
 });
