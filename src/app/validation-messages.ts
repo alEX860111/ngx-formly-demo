@@ -9,7 +9,7 @@ import { MinFilenameLengthError } from './file-type/validators/min-filename-leng
 
 export class ValidationMessages {
 
-  private static readonly FILE_SIZE_PIPE = new FileSizePipe();
+  private static readonly FILE_SIZE_PIPE = new FileSizePipe('en-US');
 
   static requiredValidationMessage() {
     return 'This field is required';
