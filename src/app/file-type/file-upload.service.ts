@@ -1,6 +1,7 @@
-import { HttpClient, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { catchError, map, filter } from 'rxjs/operators';
 import { FileUploadState } from './file-upload-state';
 
 @Injectable()
@@ -9,32 +10,41 @@ export class FileUploadService {
   constructor(private readonly http: HttpClient) { }
 
   public upload(file: File, url: string): Observable<FileUploadState> {
+    const request: HttpRequest<FormData> = this.createRequest(file, url);
+
+    return this.http.request(request).pipe(
+      filter(event => {
+        return event.type === HttpEventType.UploadProgress
+          || event.type === HttpEventType.Response;
+      }),
+      map(this.createFileUploadState),
+      catchError((error: HttpErrorResponse) => {
+        throw error.statusText;
+      })
+    );
+  }
+
+  private createRequest(file: File, url: string): HttpRequest<FormData> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
 
-    const req = new HttpRequest('POST', url, formData, {
+    return new HttpRequest('POST', url, formData, {
       reportProgress: true
     });
+  }
 
-    const progress = new Subject<FileUploadState>();
-
-    this.http.request(req).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-
-        const percentDone = Math.round(100 * event.loaded / event.total);
-
-        progress.next({ progress: percentDone });
-      } else if (event instanceof HttpResponse) {
-        if (event.ok) {
-          progress.next({ progress: 100, location: event.headers.get('Location') });
-          progress.complete();
-        } else {
-          progress.error(event.statusText);
-        }
+  private createFileUploadState(event: HttpEvent<unknown>): FileUploadState {
+    if (event.type === HttpEventType.UploadProgress) {
+      const percentDone = Math.round(100 * event.loaded / event.total);
+      return { progress: percentDone };
+    } else if (event instanceof HttpResponse) {
+      if (event.ok) {
+        return { progress: 100, location: event.headers.get('Location') };
+      } else {
+        throw event.statusText;
       }
-    }, error => progress.error(error.statusText));
-
-    return progress.asObservable();
+    }
+    throw 'upload error';
   }
 
 }
