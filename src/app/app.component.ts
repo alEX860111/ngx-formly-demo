@@ -34,7 +34,6 @@ export class AppComponent {
           },
           validators: {
             validation: [
-              Validators.required,
               FileListValidators.minFiles(2),
               FileListValidators.maxFiles(4),
               FileListValidators.totalFilesize(400 * 1000)

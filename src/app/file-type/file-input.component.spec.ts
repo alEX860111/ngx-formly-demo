@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { FileInputComponent } from './file-input.component';
 import { FILE_TYPE_CONFIG } from './file-type-config';
 import { SelectedFile } from './selected-file';

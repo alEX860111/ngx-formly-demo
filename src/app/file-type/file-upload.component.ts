@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { of, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 import { FileUploadService } from './file-upload.service';
 import { SelectedFile } from './selected-file';
-import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 
 @Component({
   selector: 'app-file-upload',
@@ -46,17 +47,7 @@ export class FileUploadComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.field.formControl.setAsyncValidators(() => {
-      if (this.uploadError) {
-        return of({ uploadError: true });
-      }
-
-      if (this.progress === 100) {
-        return of(null);
-      }
-
-      return of({ uploadInProgress: true });
-    });
+    this.field.formControl.setAsyncValidators(this.validateUpload.bind(this));
 
     setTimeout(() => this.field.formControl.updateValueAndValidity(), 0);
 
@@ -78,6 +69,18 @@ export class FileUploadComponent implements OnInit, OnDestroy {
             this.fileIcon = 'fileType:file';
           }
         });
+  }
+
+  private validateUpload(): Observable<ValidationErrors | null> {
+    if (this.uploadError) {
+      return of({ uploadError: true });
+    }
+
+    if (this.progress === 100) {
+      return of(null);
+    }
+
+    return of({ uploadInProgress: true });
   }
 
   ngOnDestroy() {
