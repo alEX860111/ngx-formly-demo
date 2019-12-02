@@ -1,4 +1,4 @@
-import { FileSizePipe } from './file-type/file-size.pipe';
+import { FileSizePipe } from './file-type/file-size/file-size.pipe';
 import { MaxFilesError } from './file-type/list-validators/max-files-error';
 import { MinFilesError } from './file-type/list-validators/min-files-error';
 import { TotalFilesizeError } from './file-type/list-validators/total-filesize-error';

@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormlyModule } from '@ngx-formly/core';
 import { of } from 'rxjs';
-import { FileSizePipe } from '../file-size.pipe';
+import { FileSizePipe } from '../file-size/file-size.pipe';
 import { FILE_TYPE_CONFIG } from '../file-type-config';
 import { FileUploadState } from './file-upload-state';
 import { FileUploadComponent } from './file-upload.component';
