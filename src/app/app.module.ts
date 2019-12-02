@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatIconRegistry } from '@angular/material';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -14,7 +14,7 @@ import { FileTypeComponent } from './file-type/file-type.component';
 import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
-import { ValidationMessages } from './validation-messages';
+import { ValidationMessages, APP_LOCALE_ID } from './validation-messages';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { ValidationMessages } from './validation-messages';
     MatNativeDateModule,
     MatCardModule
   ],
-  providers: [],
+  providers: [ {provide: LOCALE_ID, useValue: APP_LOCALE_ID } ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

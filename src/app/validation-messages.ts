@@ -7,9 +7,11 @@ import { FilesizeError } from './file-type/validators/filesize-error';
 import { MaxFilenameLengthError } from './file-type/validators/max-filename-length-error';
 import { MinFilenameLengthError } from './file-type/validators/min-filename-length-error';
 
+export const APP_LOCALE_ID = 'en-US';
+
 export class ValidationMessages {
 
-  private static readonly FILE_SIZE_PIPE = new FileSizePipe('en-US');
+  private static readonly FILE_SIZE_PIPE = new FileSizePipe(APP_LOCALE_ID);
 
   static requiredValidationMessage() {
     return 'This field is required';
