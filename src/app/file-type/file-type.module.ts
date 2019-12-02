@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { MatTooltipModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormlyModule } from '@ngx-formly/core';
-import { FileInputComponent } from './file-input.component';
+import { FileInputComponent } from './file-input/file-input.component';
 import { FileSizePipe } from './file-size.pipe';
 import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 import { FileTypeComponent } from './file-type.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
   imports: [

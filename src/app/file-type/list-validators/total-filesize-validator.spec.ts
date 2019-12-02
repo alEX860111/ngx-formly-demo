@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 import { TotalFilesizeError } from './total-filesize-error';
 import { TotalFilesizeValidator } from './total-filesize-validator';
 

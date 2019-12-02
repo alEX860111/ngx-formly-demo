@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { MaxFilenameLengthError } from './max-filename-length-error';
 import { MaxFilenameLengthValidator } from './max-filename-length-validator';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 
 describe('MaxFilenameLengthValidator', () => {
 

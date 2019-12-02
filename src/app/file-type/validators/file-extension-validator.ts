@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 import { FileExtensionError } from './file-extension-error';
 
 export class FileExtensionValidator {

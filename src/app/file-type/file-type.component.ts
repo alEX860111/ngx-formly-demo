@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FieldArrayType } from '@ngx-formly/core';
-import { SelectedFile } from './selected-file';
+import { SelectedFile } from './file-input/selected-file';
 
 @Component({
   selector: 'app-file-type',

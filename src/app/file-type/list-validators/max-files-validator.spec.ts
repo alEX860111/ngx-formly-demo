@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 import { MaxFilesError } from './max-files-error';
 import { MaxFilesValidator } from './max-files-validator';
 

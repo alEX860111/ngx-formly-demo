@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 import { MinFilesError } from './min-files-error';
 import { MinFilesValidator } from './min-files-validator';
 

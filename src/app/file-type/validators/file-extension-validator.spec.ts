@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { FileExtensionValidator } from './file-extension-validator';
 import { FileExtensionError } from './file-extension-error';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 
 describe('FileExtensionValidator', () => {
 

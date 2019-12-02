@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { FilesizeError } from './filesize-error';
 import { FilesizeValidator } from './filesize-validator';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 
 describe('FilesizeValidator', () => {
 

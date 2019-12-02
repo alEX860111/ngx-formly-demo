@@ -12,7 +12,7 @@ import { FILE_TYPE_CONFIG } from '../file-type-config';
 import { FileUploadState } from './file-upload-state';
 import { FileUploadComponent } from './file-upload.component';
 import { FileUploadService } from './file-upload.service';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 
 describe('FileUploadComponent', () => {
 

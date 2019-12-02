@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Inject, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from '../file-type-config';
 import { SelectedFile } from './selected-file';
 
 @Component({

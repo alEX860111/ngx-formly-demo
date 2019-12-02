@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { MaxFilenameLengthError } from './max-filename-length-error';
-import { SelectedFile } from '../selected-file';
+import { SelectedFile } from '../file-input/selected-file';
 
 export class MaxFilenameLengthValidator {
 
