@@ -3,6 +3,7 @@ import { MaxFilesError } from './file-type/list-validators/max-files-error';
 import { MinFilesError } from './file-type/list-validators/min-files-error';
 import { TotalFilesizeError } from './file-type/list-validators/total-filesize-error';
 import { FileExtensionError } from './file-type/validators/file-extension-error';
+import { FilenameForbiddenCharactersError } from './file-type/validators/filename-forbidden-characters-error';
 import { FilesizeError } from './file-type/validators/filesize-error';
 import { MaxFilenameLengthError } from './file-type/validators/max-filename-length-error';
 import { MinFilenameLengthError } from './file-type/validators/min-filename-length-error';
@@ -42,6 +43,10 @@ export class ValidationMessages {
 
   static filesizeMessage(err: FilesizeError) {
     return `The file is too big. Allowed filesize: ${ValidationMessages.FILE_SIZE_PIPE.transform(err.maxFilesize)}`;
+  }
+
+  static filenameForbiddenCharacters(err: FilenameForbiddenCharactersError) {
+    return `The filename contains forbidden characters: ${err.actualForbiddenCharacters}`;
   }
 
   static minFilesMessage(err: MinFilesError) {

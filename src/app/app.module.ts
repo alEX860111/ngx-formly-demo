@@ -14,7 +14,7 @@ import { FileTypeComponent } from './file-type/file-type.component';
 import { FileTypeModule } from './file-type/file-type.module';
 import { PanelWrapperComponent } from './panel-wrapper.component';
 import { RepeatTypeComponent } from './repeat-section.type';
-import { ValidationMessages, APP_LOCALE_ID } from './validation-messages';
+import { APP_LOCALE_ID, ValidationMessages } from './validation-messages';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { ValidationMessages, APP_LOCALE_ID } from './validation-messages';
           { name: 'minFilenameLength', message: ValidationMessages.minFilenameLengthMessage },
           { name: 'fileExtension', message: ValidationMessages.fileExtensionMessage },
           { name: 'filesize', message: ValidationMessages.filesizeMessage },
+          { name: 'filenameForbiddenCharacters', message: ValidationMessages.filenameForbiddenCharacters },
           { name: 'minFiles', message: ValidationMessages.minFilesMessage },
           { name: 'maxFiles', message: ValidationMessages.maxFilesMessage },
           { name: 'totalFilesize', message: ValidationMessages.totalFilesizeMessage },

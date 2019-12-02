@@ -45,7 +45,8 @@ export class AppComponent {
                 FileValidators.minFilenameLength(1),
                 FileValidators.maxFilenameLength(50),
                 FileValidators.fileExtension(['pdf', 'txt', 'png']),
-                FileValidators.filesize(1000 * 1000)
+                FileValidators.filesize(1000 * 1000),
+                FileValidators.filenameForbiddenCharacters('/')
               ]
             }
           }
