@@ -2,9 +2,9 @@ import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } fro
 import { ValidationErrors } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
+import { FileTypeConfig, FILE_TYPE_CONFIG } from '../file-type-config';
 import { FileUploadService } from './file-upload.service';
-import { SelectedFile } from './selected-file';
+import { SelectedFile } from '../selected-file';
 
 @Component({
   selector: 'app-file-upload',

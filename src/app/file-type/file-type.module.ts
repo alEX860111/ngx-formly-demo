@@ -10,7 +10,7 @@ import { FileInputComponent } from './file-input.component';
 import { FileSizePipe } from './file-size.pipe';
 import { FileTypeConfig, FILE_TYPE_CONFIG } from './file-type-config';
 import { FileTypeComponent } from './file-type.component';
-import { FileUploadComponent } from './file-upload.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 import { MatTooltipModule } from '@angular/material';
 
 @NgModule({
