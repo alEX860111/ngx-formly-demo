@@ -7,7 +7,7 @@ export class FileSizePipe implements PipeTransform {
   
   private static readonly KILO = 1000;
 
-  constructor(@Inject(LOCALE_ID) public readonly localeId: string) { }
+  constructor(@Inject(LOCALE_ID) private readonly localeId: string) { }
 
   transform(bytes: number): string {
     if (bytes < FileSizePipe.KILO) {
