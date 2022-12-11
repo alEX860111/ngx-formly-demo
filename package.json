@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.4",
     "@ngx-formly/core": "^5.5.2",
     "@ngx-formly/material": "^5.5.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.6-alpha.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
